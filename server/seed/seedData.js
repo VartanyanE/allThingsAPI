@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import allThingsModel from "../models/model.js";
+import dotenv from "dotenv";
+dotenv.config();
 // This file empties the Books collection and inserts the books below.
 
 mongoose.connect(
@@ -13,8 +15,14 @@ mongoose.connect(
 
 const seedData = [
   new allThingsModel({
-    title: "Seed that shit",
-    message: "Guess it worked",
+    dataType: "array",
+    syntaxStart: "[",
+    syntaxEnd: "]",
+  }),
+  new allThingsModel({
+    dataType: "object",
+    syntaxStart: "{",
+    syntaxEnd: "}",
   }),
 ];
 

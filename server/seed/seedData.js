@@ -16,16 +16,65 @@ mongoose.connect(
 const seedData = [
   new allThingsModel({
     dataType: "array",
-    syntaxStart: "[",
-    syntaxEnd: "]",
+    start: "const",
+    middle: " = [",
+    end: "]",
   }),
   new allThingsModel({
     dataType: "object",
-    syntaxStart: "{",
-    syntaxEnd: "}",
+    start: "const",
+    middle: " = {",
+    end: "}",
+  }),
+  new allThingsModel({
+    dataType: "arrowFunction",
+    start: "const",
+    middle: " = () =>",
+    end: "{}",
+  }),
+  new allThingsModel({
+    dataType: "divWithClass",
+    start: `<div classname="`,
+    middle: `"></div>`,
+    end: "",
+  }),
+  new allThingsModel({
+    dataType: "divWithId",
+    start: `<div id="`,
+    middle: `"></div>`,
+    end: "",
+  }),
+  new allThingsModel({
+    dataType: "forLoop",
+    start: "for(i = 0; i <",
+    middle: ".length; i++)",
+    end: "{}",
+  }),
+  new allThingsModel({
+    dataType: "mathRandomFloor",
+    start: "Math.floor(Math.random() * ",
+    middle: ")",
+    end: "",
+  }),
+  new allThingsModel({
+    dataType: "forEach",
+    start: "",
+    middle: ".forEach((item)=> {})",
+    end: "",
+  }),
+  new allThingsModel({
+    dataType: "ifElse",
+    start: "if(condition)",
+    middle: "{}",
+    end: "else {}",
+  }),
+  new allThingsModel({
+    dataType: "setTimeout",
+    start: "setTimeout(function(){  },",
+    middle: ")",
+    end: "",
   }),
 ];
-
 var done = 0;
 for (var i = 0; i < seedData.length; i++) {
   seedData[i].save(function (err, result) {

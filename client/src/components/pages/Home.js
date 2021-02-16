@@ -6,13 +6,14 @@ function Home() {
   const [selectedElement, setSelectedElement] = useState([{}]);
   const [elementName, setElementName] = useState([{}]);
   const [searchResultsState, setSearchResultsState] = useState(false);
+
   useEffect(() => {
     getData().then(({ data }) => {
       setFetchedData(data);
     });
   }, []);
-  console.log(fetchedData);
-  console.log(elementName);
+  // console.log(fetchedData);
+  // console.log(elementName);
   const handleSubmit = (event) => {
     event.preventDefault();
     const e = document.getElementById("elements");
@@ -22,38 +23,72 @@ function Home() {
     });
     setSearchResultsState(true);
 
-    console.log(selectedElement);
+    // console.log(selectedElement);
   };
+
+  const copyFunction = (e) => {
+    e.preventDefault();
+    /* Get the text field */
+    var range = document.createRange();
+    range.selectNode(document.getElementById("copyDiv"));
+    window.getSelection().removeAllRanges(); // clear current selection
+    window.getSelection().addRange(range); // to select text
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges(); // to deselect
+  };
+
   return (
     <div>
       <div>
         <h5>
           <form onSubmit={handleSubmit}>
             {" "}
-            Make me an
             <select id="elements">
-              <option value="array">Array</option>
-              <option value="object">Object</option>
+              <optgroup label="HTML">
+                {" "}
+                <option value="divWithClass">div with classname</option>
+                <option value="divWithId">div with id</option>
+              </optgroup>
+              <optgroup label="JAVASCRIPT">
+                <option value="array">array</option>
+                <option value="object">object</option>
+                <option value="arrowFunction">arrow function</option>
+
+                <option value="ifElse">if else</option>
+
+                <option value="forLoop">for loop</option>
+                <option value="forEach">forEach</option>
+
+                <option value="mathRandomFloor">math.random/floor</option>
+                <option value="setTimeout">set timeout</option>
+              </optgroup>
             </select>{" "}
-            with the name of
             <input
+              id="myInput"
+              placeholder="Enter your input"
               value={elementName.name}
               onChange={(e) =>
                 setElementName([{ ...elementName, name: e.target.value }])
               }
             ></input>
-            <button type="submit">Do It</button>
+            <button type="submit">Output</button>
           </form>
         </h5>
       </div>
-      {searchResultsState
-        ? selectedElement.map((item) => (
-            <h5>
-              const {elementName.map((name) => name.name)} = {item.syntaxStart}
-              {item.syntaxEnd};
-            </h5>
-          ))
-        : ""}
+      <div id="copyDiv">
+        {searchResultsState
+          ? React.Children.toArray(
+              selectedElement.map((item) => (
+                <h5>
+                  {item.start} {elementName.map((name) => name.name)}
+                  {item.middle}
+                  {item.end}
+                </h5>
+              ))
+            )
+          : ""}
+      </div>
+      <button onClick={copyFunction}>Copy To Clipboard</button>
     </div>
   );
 }

@@ -48,6 +48,7 @@ function Home() {
                 {" "}
                 <option value="divWithClass">div with classname</option>
                 <option value="divWithId">div with id</option>
+                <option value="linkStylesheet">link stylesheet</option>
               </optgroup>
               <optgroup label="JAVASCRIPT">
                 <option value="array">array</option>

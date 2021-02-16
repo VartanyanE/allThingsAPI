@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 // we build our schema
 const allThingsSchema = mongoose.Schema({
+  language: "String",
   dataType: "String",
   start: "String",
   middle: "String",

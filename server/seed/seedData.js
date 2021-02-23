@@ -32,8 +32,15 @@ const seedData = [
     language: "js",
     dataType: "arrowFunction",
     start: "const",
-    middle: " = () =>",
-    end: "{}",
+    middle: " = (",
+    end: ") => {}",
+  }),
+  new allThingsModel({
+    language: "js",
+    dataType: "arrowFunction ASYNC AWAIT",
+    start: "const",
+    middle: " = async (",
+    end: ") => {/* await */}",
   }),
   new allThingsModel({
     language: "html",
@@ -89,6 +96,13 @@ const seedData = [
     dataType: "setTimeout",
     start: "setTimeout(function(){  },",
     middle: ")",
+    end: "",
+  }),
+  new allThingsModel({
+    language: "react",
+    dataType: "useEffect",
+    start: "useEffect(() => {}, [])",
+    middle: "",
     end: "",
   }),
 ];

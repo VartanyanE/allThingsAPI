@@ -9,8 +9,8 @@
     "client": "cd ../client && npm run start",
     "seed": "node seed/seedData.js",
     "install": "cd ../client && npm install",
-    "build": "cd ../client && npm run build",
-    "heroku-postbuild": "cd ../client && npm run build",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "cd server && npm run build",
     "stop": "taskkill -F -IM node.exe"
   },
   "author": "",

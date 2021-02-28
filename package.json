@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": " cd server && nodemon server.js",
     "client": "cd ../client && npm run start",
     "seed": "node seed/seedData.js",
     "install": "cd ../client && npm install",

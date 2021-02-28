@@ -105,6 +105,13 @@ const seedData = [
     middle: "",
     end: "",
   }),
+  new allThingsModel({
+    language: "js",
+    dataType: "consoleLog",
+    start: "console.log(`%c  ${",
+    middle: "}`, ",
+    end: ")",
+  }),
 ];
 var done = 0;
 for (var i = 0; i < seedData.length; i++) {

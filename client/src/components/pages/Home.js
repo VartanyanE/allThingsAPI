@@ -20,11 +20,18 @@ function Home() {
       name: "name",
     },
   ]);
+  const [customInput, setCustomInput] = useState([
+    {
+      name: "parameters",
+    },
+  ]);
   const [searchResultsState, setSearchResultsState] = useState(false);
-
+  let colored = "green";
+  console.log(`%c ${colored}`, "color: green");
   useEffect(() => {
     getData().then(({ data }) => {
       setFetchedData(data);
+      console.log(`%c ${data}`, "color: green");
     });
   }, []);
   // console.log(fetchedData);
@@ -158,6 +165,20 @@ function Home() {
                     },
                   ]);
                   setParamState(true);
+                } else if (selectedValue === "consoleLog") {
+                  setCustomInput([
+                    {
+                      ...customInput,
+                      name: "enter css",
+                    },
+                  ]);
+                  setCustomPlaceholder([
+                    {
+                      ...customPlaceholder,
+                      name: "console log",
+                    },
+                  ]);
+                  setParamState(true);
                 } else if (selectedValue === "arrowFunction ASYNC AWAIT") {
                   setCustomPlaceholder([
                     {
@@ -214,6 +235,7 @@ function Home() {
 
                 <option value="mathRandomFloor">math.random/floor</option>
                 <option value="setTimeout">set timeout</option>
+                <option value="consoleLog">styled console log</option>
               </optgroup>
               <optgroup label="REACT">
                 <option value="useEffect">useEffect</option>
@@ -234,7 +256,7 @@ function Home() {
               <input
                 id="myInput"
                 ref={inputParam}
-                placeholder="parameters"
+                placeholder={customInput[0].name}
                 value={parameters.name}
                 onChange={(e) =>
                   setParameters([{ ...parameters, name: e.target.value }])

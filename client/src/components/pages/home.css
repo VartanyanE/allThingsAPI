@@ -1,7 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,200&display=swap");
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: #000007;
+  background-color: #dce1e3;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .grid-container {
@@ -12,12 +18,23 @@ body {
 }
 
 .main {
-  color: #e0f2fa;
+  color: #02324e;
   font-size: 16px;
   font-family: "JetBrains Mono", monospace;
 }
 
+.logo {
+  /* justify-self: start; */
+  margin-left: 20px !important;
+}
+
+.about {
+  line-height: 200%;
+  margin-left: 20px;
+}
+
 .main-inputs {
+  margin-top: 100px;
   justify-self: start;
 }
 

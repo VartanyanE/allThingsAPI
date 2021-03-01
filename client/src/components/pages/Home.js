@@ -3,6 +3,7 @@ import { getData, searchByName } from "../../utils/Api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./home.css";
+import logo from "../../codelogo.png";
 toast.configure();
 
 function Home() {
@@ -94,7 +95,9 @@ function Home() {
 
   return (
     <div className="grid-container">
-      <div>Hello</div>
+      <div className="logo">
+        <img src={logo}></img>
+      </div>
       <div className="main-inputs">
         <h5 className="main">
           <form onSubmit={handleSubmit}>
@@ -315,7 +318,17 @@ function Home() {
           </form>
         </h5>
       </div>
-      <div>Hello</div>
+      <div className="about">
+        <h3>
+          Hello my fellow Javascripters. <br />
+          CODESNIPSNIP is a javascript snippet <br />
+          generator that is built to increase <br />
+          productivity. Spend less time <br />
+          writing redundant code and more <br />
+          time building logic and design.
+          <br />
+        </h3>
+      </div>
       <div id="copyDiv" className="copy" onClick={copyFunction}>
         {searchResultsState
           ? React.Children.toArray(

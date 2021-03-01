@@ -8,13 +8,15 @@ toast.configure();
 function Home() {
   const [fetchedData, setFetchedData] = useState([{}]);
 
-  const inputEl = useRef(null);
-  const inputParam = useRef(null);
+  const inputEl = useRef({});
+  const inputParam = useRef({});
 
   const [selectedElement, setSelectedElement] = useState([{}]);
   const [elementName, setElementName] = useState([{}]);
   const [parameters, setParameters] = useState([{}]);
   const [paramState, setParamState] = useState(false);
+  const [inputState, setInputState] = useState(false);
+  const [buttonState, setButtonState] = useState(false);
   const [customPlaceholder, setCustomPlaceholder] = useState([
     {
       name: "name",
@@ -31,7 +33,7 @@ function Home() {
   useEffect(() => {
     getData().then(({ data }) => {
       setFetchedData(data);
-      console.log(`%c ${data}`, "color: green");
+      console.log(`%c ${"array"}`, "color: green");
     });
   }, []);
   // console.log(fetchedData);
@@ -51,7 +53,7 @@ function Home() {
     }
 
     clearForm();
-    // clearParamInput();
+    clearParamInput();
   };
 
   const clearForm = () => {
@@ -78,8 +80,8 @@ function Home() {
     window.getSelection().removeAllRanges(); // clear current selection
     window.getSelection().addRange(range); // to select text
     document.execCommand("copy");
-    window.getSelection().removeAllRanges(); // to deselect
-    toast("Copied!", {
+    window.getSelection().removeAllRanges();
+    toast("Copied The Code!", {
       position: "bottom-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -92,6 +94,7 @@ function Home() {
 
   return (
     <div className="grid-container">
+      <div>Hello</div>
       <div className="main-inputs">
         <h5 className="main">
           <form onSubmit={handleSubmit}>
@@ -106,13 +109,6 @@ function Home() {
                   });
                   setSearchResultsState(true);
                   setParamState(false);
-                } else if (selectedValue === "ifElse") {
-                  searchByName(selectedValue).then(({ data }) => {
-                    setSelectedElement(data);
-                    setParamState(false);
-                  });
-
-                  setSearchResultsState(true);
                 } else if (selectedValue === "setTimeout") {
                   setCustomPlaceholder([
                     {
@@ -120,6 +116,9 @@ function Home() {
                       name: "milliseconds",
                     },
                   ]);
+                  setButtonState(true);
+                  setInputState(true);
+                  setSearchResultsState(false);
                   setParamState(false);
                   setParameters([{ ...parameters, name: "" }]);
                 } else if (selectedValue === "divWithClass") {
@@ -129,6 +128,9 @@ function Home() {
                       name: "class name",
                     },
                   ]);
+                  setSearchResultsState(false);
+                  setButtonState(true);
+
                   setParamState(false);
                   setParameters([{ ...parameters, name: "" }]);
                 } else if (selectedValue === "forLoop") {
@@ -138,6 +140,9 @@ function Home() {
                       name: "array name",
                     },
                   ]);
+                  setInputState(true);
+                  setButtonState(true);
+
                   setParamState(false);
                 } else if (selectedValue === "divWithId") {
                   setCustomPlaceholder([
@@ -146,6 +151,9 @@ function Home() {
                       name: "id name",
                     },
                   ]);
+                  setSearchResultsState(false);
+                  setButtonState(true);
+
                   setParamState(false);
                   setParameters([{ ...parameters, name: "" }]);
                 } else if (selectedValue === "linkStylesheet") {
@@ -155,6 +163,9 @@ function Home() {
                       name: "css file name",
                     },
                   ]);
+                  setSearchResultsState(false);
+                  setButtonState(true);
+
                   setParamState(false);
                   setParameters([{ ...parameters, name: "" }]);
                 } else if (selectedValue === "arrowFunction") {
@@ -164,6 +175,10 @@ function Home() {
                       name: "function name",
                     },
                   ]);
+                  setSearchResultsState(false);
+                  setInputState(true);
+                  setButtonState(true);
+
                   setParamState(true);
                 } else if (selectedValue === "consoleLog") {
                   setCustomInput([
@@ -178,6 +193,11 @@ function Home() {
                       name: "console log",
                     },
                   ]);
+                  setInputState(true);
+
+                  setSearchResultsState(false);
+                  setButtonState(true);
+
                   setParamState(true);
                 } else if (selectedValue === "arrowFunction ASYNC AWAIT") {
                   setCustomPlaceholder([
@@ -186,6 +206,10 @@ function Home() {
                       name: "function name",
                     },
                   ]);
+                  setSearchResultsState(false);
+                  setInputState(true);
+                  setButtonState(true);
+
                   setParamState(true);
                 } else if (selectedValue === "forEach") {
                   setCustomPlaceholder([
@@ -194,6 +218,10 @@ function Home() {
                       name: "array name",
                     },
                   ]);
+                  setSearchResultsState(false);
+                  setInputState(true);
+                  setButtonState(true);
+
                   setParamState(false);
                   setParameters([{ ...parameters, name: "" }]);
                 } else if (selectedValue === "mathRandomFloor") {
@@ -203,6 +231,10 @@ function Home() {
                       name: "max integer",
                     },
                   ]);
+                  setSearchResultsState(false);
+                  setInputState(true);
+                  setButtonState(true);
+
                   setParamState(false);
                   setParameters([{ ...parameters, name: "" }]);
                 } else {
@@ -212,6 +244,10 @@ function Home() {
                       name: "name",
                     },
                   ]);
+                  setSearchResultsState(false);
+                  setInputState(true);
+                  setButtonState(true);
+
                   setParamState(false);
                   setParameters([{ ...parameters, name: "" }]);
                 }
@@ -220,7 +256,7 @@ function Home() {
               }}
               id="elements"
             >
-              <option value=""></option>
+              <option value="">Choose Your Poison</option>
 
               <optgroup label="JAVASCRIPT">
                 <option value="array">array</option>
@@ -242,15 +278,19 @@ function Home() {
               </optgroup>
             </select>{" "}
             <br />
-            <input
-              id="myInput"
-              ref={inputEl}
-              placeholder={customPlaceholder[0].name}
-              value={elementName.name}
-              onChange={(e) =>
-                setElementName([{ ...elementName, name: e.target.value }])
-              }
-            ></input>
+            {inputState ? (
+              <input
+                id="myInput"
+                ref={inputEl}
+                placeholder={customPlaceholder[0].name}
+                value={elementName.name}
+                onChange={(e) =>
+                  setElementName([{ ...elementName, name: e.target.value }])
+                }
+              ></input>
+            ) : (
+              ""
+            )}
             <br />
             {paramState ? (
               <input
@@ -265,12 +305,17 @@ function Home() {
             ) : (
               ""
             )}
-            <button className="button_slide slide_right" type="submit">
-              Output
-            </button>
+            {buttonState ? (
+              <button className="button_slide slide_right" type="submit">
+                Output
+              </button>
+            ) : (
+              ""
+            )}
           </form>
         </h5>
       </div>
+      <div>Hello</div>
       <div id="copyDiv" className="copy" onClick={copyFunction}>
         {searchResultsState
           ? React.Children.toArray(

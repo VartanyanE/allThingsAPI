@@ -38,6 +38,7 @@ function Home() {
       console.log(`%c ${"cant believe its green"}`, "font-size: 24px");
     });
   }, []);
+
   // console.log(fetchedData);
   // console.log(elementName);
   const handleSubmit = (event) => {
@@ -54,8 +55,10 @@ function Home() {
       showOnSelect(selectedValue);
     }
 
+    if (paramState) {
+      clearParamInput();
+    }
     clearForm();
-    clearParamInput();
   };
 
   const clearForm = () => {
@@ -102,13 +105,10 @@ function Home() {
       {docState ? (
         <div className="about">
           <h5>
-            Hello my fellow Javascripters. <br />
-            CODESNIPSNIP is a javascript snippet <br />
-            generator that is built to increase <br />
-            productivity. Spend less time <br />
-            writing redundant code and more <br />
-            time building logic and design.
-            <br />
+            Hello my fellow Javascripters. CODESNIPSNIP is a javascript snippet
+            generator that I built to increase my productivity. Instead of
+            writing redundant code I can focus on logic and design. Anywho, hope
+            you find this useful!
           </h5>
           <button className="myButton" onClick={() => setDocState(false)}>
             Documentation
@@ -116,15 +116,14 @@ function Home() {
         </div>
       ) : (
         <div className="about">
-          <h5>
-            There is really not much. <br />
-            Select the snippet you want. <br />
-            Enter the inputs like the example <br />
-            shows. Click Generate Code. <br />
-            Click on the snippet that is <br />
-            generated to copy to clipboard. <br />
-            Paste into your project!
-          </h5>
+          <h4>
+            <ul>
+              <li>Select Snippet</li>
+              <li>Enter Input, Follow Placeholder Example</li>
+              <li>Click Generate Code</li>
+              <li>Click On Snippet To Copy To Clipboard</li>
+            </ul>
+          </h4>
         </div>
       )}
       <div className="main-inputs">
@@ -172,6 +171,13 @@ function Home() {
                       name: "function name  e.g.     myFunction",
                     },
                   ]);
+                  setCustomInput([
+                    {
+                      ...customInput,
+
+                      name: "parameters   e.g.     req,res",
+                    },
+                  ]);
                   setSearchResultsState(false);
                   setInputState(true);
                   setButtonState(true);
@@ -201,6 +207,13 @@ function Home() {
                     {
                       ...customPlaceholder,
                       name: "function name   e.g.     myFunction",
+                    },
+                  ]);
+                  setCustomInput([
+                    {
+                      ...customInput,
+
+                      name: "parameters   e.g.     req,res",
                     },
                   ]);
                   setSearchResultsState(false);
@@ -303,7 +316,7 @@ function Home() {
               ""
             )}
             {buttonState ? (
-              <button className="button_slide slide_right" type="submit">
+              <button className="myButton" type="submit">
                 Generate Code
               </button>
             ) : (
